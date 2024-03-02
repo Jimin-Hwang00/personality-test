@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>rank</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        .table-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -70%);
+            width: 60%; 
+        }
+        h1 {
+            text-align: center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .modal-button {
+            margin-left: 10px;
+        }
+        .retestBt{
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container table-container">
+        <h1 class="p-3 mb-2 bg-secondary-subtle text-emphasis-secondary">Rank</h1>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">*</th>
+                    <th scope="col">Score</th>
+                    <th scope="col">Correct Num</th>
+                    <th scope="col">Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% scores.forEach((score, index) => { %>
+                    <tr>
+                        <th scope="row"><%= index + 1 %></th>
+                        <td><%= score.score %></td>
+                        <td><%= score.correct_total %></td>
+                        <td><%= score.percentage %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+        <div class="button-container">
+            <form action="/" method="GET">
+                <button type="submit" class="btn btn-outline-dark btn-lg">Main</button>
+            </form>
+            <form class="retestBt" action="/reasoningTest" method="GET">
+                <button type="submit" class="btn btn-outline-dark btn-lg">Retest</button>
+            </form>
+            <button type="button" class="btn btn-outline-dark btn-lg modal-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                정답 해설보기
+            </button>
+        </div>
+    </div>
+
+     <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">정답 및 해설</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <a style="white-space: pre-line;">
+                Q1. 아파트에서 한 아줌마가 뺑소니를 당하기 전, "노랑머리!!"라고 외치고 쓰러졌다. 그래서 경찰은 아줌마가 사는 아파트에서 염색한 사람들 중 범인을 잡았다. 노랑머리를 한 용의자는 총 4명. 이들 중 범인을 누구일까? 
+
+1. 최근 이사 온 대학생 2. 아파트  단골 분식집 주인 3. 친한 부녀회장 4. 아줌마의 남편
+이 중 이름을 모르는 사람은 최근에 이사 온 학생.
+
+
+Q2. 어제가 내일이었으면 좋겠다. 그럼 오늘이 금요일일 텐데... 그렇다면 오늘은 무슨 요일일까요?
+
+1. 토요일 2. 일요일 3. 월요일 4. 화요일
+-> 금요일의 내일은 토요일! 어제가 내일(토요일) 이었으면 좋겠다고 했으니 오늘은 일요일
+
+Q3. 멈춘다는 것은 냄비와 같고,  살아있다는 것은 악마와도 같다. 그렇다면, 그물은 무엇과 같을까?
+
+1. one 2. water 3. human 4. ten
+stop => pots
+live => evil
+net => ten
+-> 거꾸로 뒤집어보자.
+
+Q4. 불이 켜진 양초가 10개가 있었다. 그런데 바람이 불어서 2개가 꺼지고 말았다. 그리고 잠시후에 보니 또 1개가 꺼져있었다. 그로부터 바람이 닿지 않도록 하고 그 후 1개도 꺼지지 않았다면 끝까지 남아있었던 양초는 몇개일까?
+
+1. 2 2. 3 3. 4 4. 5
+나머지 7개는 녹아서 사라졌기 때문이다.
+
+Q5. 당신의 눈은 가려졌고 빨간색, 파란색, 하얀색, 노란색 양말을 각각 같은 색의 가방에 넣어야한다. 4개의 가방과 4개의 양말 색은 모두 하나씩 쌍을 이루고 있다. 4가지중 3가지만 맞게 실행할 확률은 얼마일까?
+
+1. 1/4 2.1/3 3. 1/2 4. 없다
+3개가 맞으면 자연스레 1개도 맞게되니 가능한 확률은 없다.
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
