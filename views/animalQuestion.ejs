@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>심리테스트</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+        .question-container {
+            margin-bottom: 20px;
+        }
+        .question-number {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .question-text {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        @media (min-width: 576px) {
+            .question-number, .question-text {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form action="/personality-test" method="POST" id="questions" onsubmit="return validateForm()">
+        <!-- 질문 반복문 -->
+        <% qList.forEach(q => { %>
+        <div class="question-container">
+            <div class="row">
+                <div class="col-sm-1 question-number">
+                    <%= q.number + 1 %>
+                </div>
+                <div class="col-sm-9 question-text">
+                    <%= q.question %>
+                </div>
+                <div class="col-sm-2">
+                    <input type="radio" id="q<%= q.number %>Yes" name="q<%= q.number %>" value="1">
+                    <label for="q<%= q.number %>Yes">네</label>
+                    <input type="radio" id="q<%= q.number %>No" name="q<%= q.number %>" value="0">
+                    <label for="q<%= q.number %>No">아니오</label>
+                </div>
+            </div>
+        </div>
+        <% }) %>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <button type="submit" class="btn btn-primary" onclick="return validateForm()">제출</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function validateForm() {
+        var radios = document.querySelectorAll('input[type="radio"]');
+        var checked = false;
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                checked = true;
+                break;
+            }
+        }
+        if (!checked) {
+            alert("모든 질문에 답해주세요!");
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>심리테스트-결과</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+        #animalImage {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #animalImage img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">당신의 결과는 <%= animal.name %>입니다.</h1>
+
+        <div id="animalImage"></div> 
+
+        <div class="text-center">
+            <a href="/" class="btn btn-primary">메인 화면 돌아가기</a>
+            <a href="/personality-test" class="btn btn-secondary">테스트 다시 하기</a>
+            <a href="/personality-test/ratio" class="btn btn-secondary">다른 사람 결과 보기</a>
+        </div>
+    </div>
+
+    <script>
+        var animalImage = document.getElementById("animalImage");
+        var lastPart = '<%= animal.answer %>';
+        var imageSrc = `/images/${lastPart}.png`;
+        animalImage.innerHTML = `<img src="${imageSrc}" class="img-fluid">`; // 동적으로 이미지 요소를 생성하여 할당합니다.
+    </script>
+
+    <!-- 부트스트랩 JS 및 종속성 추가 -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
