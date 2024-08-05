@@ -8,6 +8,7 @@ app.use(express.json());            // JSON 파싱 미들웨어 추가
 app.use(express.urlencoded({extended: true}));  // URL-encoded 데이터 파싱 미들웨어 추가
 app.use(express.static('./public'));    // 정적 파일 서비스 미들웨어
 
+
 app.route("/")
 .get((req, res) => {
     res.render("main");
